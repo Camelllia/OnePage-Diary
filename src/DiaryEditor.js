@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef} from "react";
 
 const DiaryEditor = () => {
     
+    const authorInput = useRef();
+    const contentInput = useRef();
     //상태선언
     const [state, setState] = useState({
         author:"",
@@ -22,7 +24,18 @@ const DiaryEditor = () => {
 
     //저장함수
     const handleSubmit = () => {
-        console.log(state);
+
+        //입력을 하지 않았다면
+        if(state.author.length < 1) {
+            //포커스 주기
+            authorInput.current.focus();
+            return;
+        }
+        if(state.content.length < 1) {
+            //포커스 주기
+            contentInput.current.focus();
+            return;
+        }
         alert("저장되었습니다.");
     }
 
@@ -31,7 +44,8 @@ const DiaryEditor = () => {
             <h2>오늘의 일기</h2>
             <div>
                 {/* 저자 입력*/}
-                <input 
+                <input
+                    ref = {authorInput}
                     name="author"
                     value={state.author} 
                     onChange={handleChangeState}
@@ -40,6 +54,7 @@ const DiaryEditor = () => {
             <div>
                 {/* 본문 입력*/}
                 <textarea
+                    ref = {contentInput}
                     name="content"
                     value={state.content} 
                     onChange={handleChangeState}

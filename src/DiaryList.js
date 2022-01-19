@@ -1,6 +1,6 @@
 import DiaryItem from "./DiaryItem.js";
 
-const DiaryList = ({ onDelete, diaryList}) => {
+const DiaryList = ({ onEdit, onRemove, diaryList}) => {
     return (
     <div className="DiaryList">
         <h2>일기 리스트</h2>
@@ -8,7 +8,7 @@ const DiaryList = ({ onDelete, diaryList}) => {
         <div>
             {/* map으로 각 배열 순회 */}
             {diaryList.map((it)=>(
-            <DiaryItem key={it.id} {...it} onDelete={onDelete}/>
+            <DiaryItem key={it.id} {...it} onRemove={onRemove} onEdit={onEdit}/>
             ))}
         </div>
     </div>)

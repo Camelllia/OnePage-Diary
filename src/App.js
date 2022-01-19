@@ -51,6 +51,7 @@ function App() {
   //데이터 삭제 함수
   const onDelete = (targetId) => {
       console.log(`${targetId}가 삭제되었습니다.`);
+      //filter로 타겟 ID(삭제될 데이터)를 제외한 새로운 배열을 생성함
       const newDiaryList = data.filter((it) => it.id !== targetId);
       setData(newDiaryList);
   }

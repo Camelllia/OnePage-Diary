@@ -1,3 +1,4 @@
+//일기 리스트에 사용될 아이템 프롭
 const DiaryItem = ({author, content, emotion, created_date, id}) => {
     return(
         <div className="DiaryItem">

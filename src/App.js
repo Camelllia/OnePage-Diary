@@ -49,7 +49,6 @@ function App() {
 
   //데이터 삭제 함수
   const onRemove = (targetId) => {
-      console.log(`${targetId}가 삭제되었습니다.`);
       //filter로 타겟 ID(삭제될 데이터)를 제외한 새로운 배열을 생성함
       const newDiaryList = data.filter((it) => it.id !== targetId);
       setData(newDiaryList);
@@ -65,9 +64,8 @@ function App() {
     );
   };
 
+  //useMemo로 재연산 방지 >> 리렌더링 비용 감소시킴(리팩토링)
   const getDiaryAnalysis = useMemo(() => {
-    console.log("일기 분석 시작");
-
     const goodCount = data.filter((it) => it.emotion >= 3).length;
     const badCount = data.length - goodCount;
     const goodRatio = (goodCount/data.length) * 100;

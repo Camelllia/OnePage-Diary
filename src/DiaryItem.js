@@ -1,7 +1,15 @@
 //일기 리스트에 사용될 아이템 프롭
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
+import { useEffect } from "react/cjs/react.development";
 
-const DiaryItem = ({author, content, emotion, created_date, id, onRemove, onEdit}) => {
+const DiaryItem = ({
+    author,
+    content, 
+    emotion, 
+    created_date, id, 
+    onRemove, 
+    onEdit
+}) => {
 
 const [isEdit, setIsEdit] = useState(false);
 const toggleIsEdit = () => setIsEdit(!isEdit);
@@ -68,4 +76,4 @@ const handleEdit = () => {
     );
 };
 
-export default DiaryItem;
+export default React.memo(DiaryItem);

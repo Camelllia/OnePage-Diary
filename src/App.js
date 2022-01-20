@@ -50,21 +50,19 @@ function App() {
 );
 
   //데이터 삭제 함수
-  const onRemove = (targetId) => {
-      //filter로 타겟 ID(삭제될 데이터)를 제외한 새로운 배열을 생성함
-      const newDiaryList = data.filter((it) => it.id !== targetId);
-      setData(newDiaryList);
-  };
+  const onRemove = useCallback((targetId) => {
+      setData(data.filter((it) => it.id !== targetId));
+  }, []);
 
   //데이터 수정 함수
-  const onEdit = (targetId, newContent) => {
-    setData(
-      //데이터가 바뀌었다면 컨텐츠를 수정해주고 아니라면 그대로 가져감
+  const onEdit = useCallback((targetId, newContent) => {
+    //데이터가 바뀌었다면 컨텐츠를 수정해주고 아니라면 그대로 가져감
+    setData((data) =>
       data.map((it)=>
         it.id === targetId ? {...it, content:newContent} : it
       )
     );
-  };
+  }, []);
 
   //useMemo로 재연산 방지 >> 리렌더링 비용 감소(리팩토링)
   const getDiaryAnalysis = useMemo(() => {

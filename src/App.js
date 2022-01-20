@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import { useEffect, useRef, useState } from 'react/cjs/react.development';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react/cjs/react.development';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
@@ -34,7 +33,7 @@ function App() {
   },[])
 
   //데이터 생성 함수
-  const onCreate = (author, content, emotion) => {
+  const onCreate = useCallback((author, content, emotion) => {
     const created_date = new Date().getTime();
     const newItem = {
         author,
@@ -44,8 +43,11 @@ function App() {
         id : dataId.current
     }
     dataId.current += 1;
-    setData([newItem, ...data]);
-  };
+    setData((data)=>[newItem, ...data]);
+  },
+
+  []
+);
 
   //데이터 삭제 함수
   const onRemove = (targetId) => {
@@ -64,7 +66,7 @@ function App() {
     );
   };
 
-  //useMemo로 재연산 방지 >> 리렌더링 비용 감소시킴(리팩토링)
+  //useMemo로 재연산 방지 >> 리렌더링 비용 감소(리팩토링)
   const getDiaryAnalysis = useMemo(() => {
     const goodCount = data.filter((it) => it.emotion >= 3).length;
     const badCount = data.length - goodCount;

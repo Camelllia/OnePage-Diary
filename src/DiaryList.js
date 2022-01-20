@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { DirayStateContext } from "./App.js";
 import DiaryItem from "./DiaryItem.js";
 
-const DiaryList = ({ onEdit, onRemove, diaryList}) => {
+const DiaryList = () => {
+    const diaryList = useContext(DirayStateContext);
     return (
     <div className="DiaryList">
         <h2>일기 리스트</h2>
@@ -8,7 +11,7 @@ const DiaryList = ({ onEdit, onRemove, diaryList}) => {
         <div>
             {/* map으로 각 배열 순회 */}
             {diaryList.map((it)=>(
-            <DiaryItem key={it.id} {...it} onRemove={onRemove} onEdit={onEdit}/>
+            <DiaryItem key={it.id} {...it}/>
             ))}
         </div>
     </div>)

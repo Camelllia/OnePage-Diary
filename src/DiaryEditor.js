@@ -1,6 +1,9 @@
-import React, { useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect, useContext} from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DiaryEditor = ({onCreate}) => {
+const DiaryEditor = () => {
+
+    const {onCreate} = useContext(DiaryDispatchContext);
     
     useEffect(() => {
         console.log("렌더");
@@ -24,7 +27,7 @@ const DiaryEditor = ({onCreate}) => {
              ...state,
              [e.target.name]: e.target.value,
          })
-    }
+    };
 
     //저장함수
     const handleSubmit = () => {
